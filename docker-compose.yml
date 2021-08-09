@@ -5,16 +5,14 @@ services:
     build: .
     ports:
       - 8000:8000
-    links:
-      - db
-      - redis
+    
   nginx:
     build: ./nginx
     container_name: nginx
     environment: 
-      - SERVER_NAME = 0.0.0.0
+      - SERVER_NAME=54.207.249.54
     restart: always
-     
+    network_mode: host     
   redis:
     image: "redis:alpine"
     restart: always
