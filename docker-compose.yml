@@ -4,13 +4,20 @@ services:
   api:
     build: .
     ports:
-      - 5000:5000
+      - 8000:8000
     links:
       - db
       - redis
-      
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    environment: 
+      - SERVER_NAME = 0.0.0.0
+    restart: always
+     
   redis:
     image: "redis:alpine"
+    restart: always
 
   db:
     image: "mongo:latest"
@@ -21,3 +28,4 @@ services:
       - ../mongodb-docker:/data/db
     ports:
       - 27017:27017
+    restart: always
